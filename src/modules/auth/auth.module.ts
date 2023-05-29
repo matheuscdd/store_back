@@ -6,10 +6,13 @@ import { PassportModule } from "@nestjs/passport";
 import { JwtModule } from "@nestjs/jwt";
 import { JwtStrategy } from "./jwt.strategy";
 import { LocalStrategy } from "./local.strategy";
+import { ContactsModule } from "../contacts/contacts.module";
+import { OwnerGuard } from "./owner.auth.guard";
 
 @Module({
   imports: [
     ClientsModule,
+    ContactsModule,
     PassportModule,
     JwtModule.register({
       secret: process.env.SECRET_KEY,
@@ -20,7 +23,8 @@ import { LocalStrategy } from "./local.strategy";
   providers: [
     AuthService,
     JwtStrategy,
-    LocalStrategy
+    LocalStrategy,
+    OwnerGuard,
   ]
 })
 export class AuthModule {}
