@@ -54,7 +54,7 @@ export class ClientsPrismaRepository implements ClientsRepository {
 
     async remove(id: string): Promise<void> {
         await this.prisma.client.delete({
-            where: {id}
+            where: {id: id}
         });
     }
 

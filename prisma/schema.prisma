@@ -29,7 +29,7 @@ model Contact {
   cellphone  String
   created_at DateTime
   client_id  String
-  client     Client   @relation(fields: [client_id], references: [id])
+  client     Client   @relation(fields: [client_id], references: [id], onDelete: Cascade)
 
   @@map("contacts")
 }
