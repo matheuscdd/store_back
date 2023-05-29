@@ -8,14 +8,19 @@ import { Client } from "./entities/client.entity";
 export class ClientsService {
   constructor(private clientRepository: ClientsRepository) {}
 
-  async verifyEmail(email: string) {
+  async findByEmail(email: string) {
     const findClient: Client = await this.clientRepository.findByEmail(email);
+    return findClient;
+  }
+
+  async verifyIsEmailUnique(email: string) {
+    const findClient: Client = await this.findByEmail(email);
     if (findClient) throw new ConflictException("Client already exists");
-    return findClient
+    return findClient;
   }
 
   async create(createClientDto: CreateClientDto) {
-    this.verifyEmail(createClientDto.email);
+    this.verifyIsEmailUnique(createClientDto.email);
     const client: Client = await this.clientRepository.create(createClientDto);
     return client;
   }
@@ -33,7 +38,7 @@ export class ClientsService {
 
   async update(id: string, updateClientDto: UpdateClientDto) {
     await this.findOne(id);
-    if (updateClientDto.email) await this.verifyEmail(updateClientDto.email);
+    if (updateClientDto.email) await this.verifyIsEmailUnique(updateClientDto.email);
     const client: Client = await this.clientRepository.update(id, updateClientDto);
     return client;
   }
