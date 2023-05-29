@@ -14,13 +14,8 @@ import { ClientsService } from "./clients.service";
 import { CreateClientDto } from "./dto/create-client.dto";
 import { UpdateClientDto } from "./dto/update-client.dto";
 import { JwtAuthGuard } from "../auth/jwt.auth.guard";
+import { iUser } from "../auth/interface";
 
-interface iUser {
-  user: {
-    id: string;
-    email: string;
-  }
-}
 
 @Controller("clients")
 export class ClientsController {

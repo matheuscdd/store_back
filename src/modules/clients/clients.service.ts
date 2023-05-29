@@ -20,7 +20,7 @@ export class ClientsService {
   }
 
   async create(createClientDto: CreateClientDto) {
-    this.verifyIsEmailUnique(createClientDto.email);
+    await this.verifyIsEmailUnique(createClientDto.email);
     const client: Client = await this.clientRepository.create(createClientDto);
     return client;
   }
