@@ -31,6 +31,12 @@ export class ClientsController {
     return this.clientsService.findAll();
   }
 
+  @Get("profile")
+  @UseGuards(JwtAuthGuard)
+  profile(@Req() {user}: iUser) {
+    return this.clientsService.findOne(user.id);
+  }
+
   @Get(":id")
   findOne(@Param("id") id: string) {
     return this.clientsService.findOne(id);
