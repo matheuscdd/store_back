@@ -1,5 +1,6 @@
 import { Exclude } from "class-transformer";
 import { randomUUID } from "node:crypto";
+import { generateAvatar } from "src/functions";
 
 export class Client {
   readonly id: string;
@@ -7,6 +8,7 @@ export class Client {
   email: string;
   cellphone: string;
   created_at: Date;
+  img: string
 
   @Exclude()
   password: string;
@@ -14,5 +16,6 @@ export class Client {
   constructor() {
     this.id = randomUUID();
     this.created_at = new Date();
+    this.img = generateAvatar();
   }
 }

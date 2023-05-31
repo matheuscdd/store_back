@@ -16,6 +16,7 @@ model Client {
   email      String    @unique
   password   String
   cellphone  String
+  img String
   created_at DateTime
   contacts   Contact[]
 
@@ -29,6 +30,7 @@ model Contact {
   cellphone  String
   created_at DateTime
   client_id  String
+  img String
   client     Client   @relation(fields: [client_id], references: [id], onDelete: Cascade)
 
   @@map("contacts")
